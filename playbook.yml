@@ -1,0 +1,19 @@
+---
+- hosts: portfolio
+  become: yes
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Copy portfolio files
+      copy:
+        src: /home/ubuntu/hosting
+        dest: /var/www/html/
+
+    - name: Start Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
